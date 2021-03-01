@@ -229,30 +229,34 @@ def main():
     # This code is contributed by Nikhil Kumar Singh(nickzuck_007)
     
     
+    # create a list of 10000 numbers
+    lst = [random.randint(1,1000000) for i in range(1000000)]
+    # each number is a random number between 1 and 10000 random.randint(1,10000)
+    
+    # in other loop for in 1 to 10000, check to see if i is in the list
+    start1 = time.time()
+    for i in range(1,1000001):
+        for l in lst:
+            if i == l:
+                break
+    end1 = time.time()
+    print("time (sec): ", end1-start1)
+    
+    
+    
     root = None
-    for i in range(10000):
-        root = insert(root, random.randint(1,10000))
+    for i in range(1000000):
+        root = insert(root, random.randint(1,100000))
         
     start = time.time()
-    for i in range(10000):
+    for i in range(1000000):
         findval(root, i)
     end = time.time()
     
     print("time (sec): ",end-start)
     
     
-    lst = []
-    for i in range(10000):
-        lst.append(random.randint(1,10000))
-        
-    start2 = time.time()
-    for i in range(10000):
-        for j in lst:
-            if j == i:
-                break
-    end2 = time.time()
-    
-    print("time (sec): ",end2-start2)
+   
             
         
     
