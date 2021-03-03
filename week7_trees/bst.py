@@ -1,5 +1,6 @@
 
-
+import random
+import time
 # Python program to demonstrate delete operation
 # in binary search tree
 
@@ -19,10 +20,23 @@ class Node:
 def inorder(root):
 	if root is not None:
 		inorder(root.left)
-		print(root.key)
+		print(root.key, end=" ")
 		inorder(root.right)
 
+# A utility function to do inorder traversal of BST
+def preorder(root):
+	if root is not None:
+		print(root.key, end=" ")
+		preorder(root.left)
+		preorder(root.right)
 
+# A utility function to do inorder traversal of BST
+def postorder(root):
+	if root is not None:
+		postorder(root.left)
+		postorder(root.right)
+		print(root.key, end=" ")
+		
 # A utility function to insert a
 # new node with given key in BST
 def insert(node, key):
@@ -107,6 +121,8 @@ def deleteNode(root, key):
 
 	return root
 
+def find_value(root, key):
+    # add the logic to find a key
 
 # Print the tree
 def print_tree(root):
@@ -223,27 +239,43 @@ def main():
     # each number is a random number between 1 and 10000 random.randint(1,10000)
     
     # in other loop for in 1 to 10000, check to see if i is in the list
-    start1 = time.time()
-    for i in range(1,10001):
-        for l in lst:
-            if i == l:
-                break
-    end1 = time.time()
-    print("time (sec): ", end1-start1)
+    # start1 = time.time()
+    # for i in range(1,10001):
+    #     for l in lst:
+    #         if i == l:
+    #             break
+    # end1 = time.time()
+    # print("time (sec): ", end1-start1)
     
     
     
-    root = None
-    for i in range(10000):
-        root = insert(root, random.randint(1,10000))
+    # root = None
+    # for i in range(10000):
+    #     root = insert(root, random.randint(1,10000))
         
     # start = time.time()
     # for i in range(10000):
     #     findval(root, i)
     # end = time.time()
     
-    print("time (sec): ",end-start)
+    # print("time (sec): ",end-start)
     
+    print("---------------------")
+    
+    tree2 = None
+    tree2 = insert(tree2, 3)
+    tree2 = insert(tree2, 1)
+    tree2 = insert(tree2, 4)
+    tree2 = insert(tree2, 2)
+    tree2 = insert(tree2, 5)
+    tree2 = insert(tree2, 9)
+    
+    display(tree2)
+    inorder(tree2)
+    print()
+    preorder(tree2)
+    print()
+    postorder(tree2)
     
    
             
