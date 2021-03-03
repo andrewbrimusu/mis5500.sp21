@@ -1,13 +1,10 @@
+
+
 # Python program to demonstrate delete operation
 # in binary search tree
 
-# A Binary Tree Node
 
-import time
-import random
-start=time.time()
-end=time.time()
-print("time (sec): ",end-start)
+# A Binary Tree Node
 
 class Node:
 
@@ -110,26 +107,14 @@ def deleteNode(root, key):
 
 	return root
 
-def findval(root, lkpval):
-    if lkpval < root.key:
-        if root.left is None:
-            return str(lkpval)+" Not Found"
-        return findval(root.left, lkpval)
-    elif lkpval > root.key:
-        if root.right is None:
-            return str(lkpval)+" Not Found"
-        return findval(root.right, lkpval)
-    else:
-        return str(root.key) + ' is found'
-        
+
 # Print the tree
-def PrintTree(root):
-    print("print tree")
+def print_tree(root):
     if root.left:
-        PrintTree(root.left)
+        print_tree(root.left)
     print( root.key)
     if root.right:
-        PrintTree(root.right)
+        print_tree(root.right)
 
 # Driver code
 """ Let us create following BST
@@ -194,6 +179,7 @@ def display_aux(root):
 
 
 def main():
+    # creating a Tree with root variable "root"
     root = None
     root = insert(root, 50)
     root = insert(root, 30)
@@ -203,13 +189,16 @@ def main():
     root = insert(root, 60)
     root = insert(root, 80)
     
-    print(findval(root, 80))
-    print(findval(root, 10))
+    # finding values in the tree
+    # print(findval(root, 80))
+    # print(findval(root, 10))
     
+    # traversing the tree
     print("Inorder traversal of the given tree")
     inorder(root)
     # PrintTree(root)
     
+    # deleting 
     print("\nDelete 20")
     root = deleteNode(root, 20)
     print("Inorder traversal of the modified tree")
@@ -226,16 +215,16 @@ def main():
     inorder(root)
     
     display(root)
-    # This code is contributed by Nikhil Kumar Singh(nickzuck_007)
+    print_tree(root)
     
     
     # create a list of 10000 numbers
-    lst = [random.randint(1,1000000) for i in range(1000000)]
+    lst = [random.randint(1,10000) for i in range(10000)]
     # each number is a random number between 1 and 10000 random.randint(1,10000)
     
     # in other loop for in 1 to 10000, check to see if i is in the list
     start1 = time.time()
-    for i in range(1,1000001):
+    for i in range(1,10001):
         for l in lst:
             if i == l:
                 break
@@ -245,13 +234,13 @@ def main():
     
     
     root = None
-    for i in range(1000000):
-        root = insert(root, random.randint(1,100000))
+    for i in range(10000):
+        root = insert(root, random.randint(1,10000))
         
-    start = time.time()
-    for i in range(1000000):
-        findval(root, i)
-    end = time.time()
+    # start = time.time()
+    # for i in range(10000):
+    #     findval(root, i)
+    # end = time.time()
     
     print("time (sec): ",end-start)
     
