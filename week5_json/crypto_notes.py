@@ -15,7 +15,8 @@ key3 = 'usd'
 
 dt = datetime(2019, 11, 30)
 
-coins = ["bitcoin-cash", "eos", "litecoin", "ethereum", "bitcoin"]
+coins = ["ripple", "cardano", "bitcoin-cash", "eos", "litecoin", "ethereum", "bitcoin"]
+
 for coin in coins:
     file = open(coin + ".csv", "w")
     file.write("Date," + coin + "\n")
@@ -23,6 +24,7 @@ for coin in coins:
         dt += timedelta(days=1)
         dts = dt.strftime("%d-%m-%Y")
         url = url1 + coin + url2 + dts + url3
+        print("url: ", url)
         req = requests.get(url)
         time.sleep(1)
         d = json.loads(req.text)
