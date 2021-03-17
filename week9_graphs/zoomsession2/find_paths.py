@@ -7,16 +7,24 @@ from itertools import permutations
 import networkx as nx
 from networkx.classes.function import path_weight
 
+import os
+os.system("sudo pip3 install matplotlib")
 import matplotlib.pyplot as plt
 
-fil = open("/home/ec2-user/environment/code/week9_graphs/zoomsession2/edges.txt")
+file = open("/home/ec2-user/environment/code/week9_graphs/zoomsession2/edges.txt")
 
 g = nx.DiGraph()
-edges = []
 
 # STEP 1
 # get all edges from the txt file
+edges = []
 
+for line in file.readlines():
+    node1, node2, weight = line.split(",")
+    weight = int(weight)
+    edges.append((node1, node2, weight))
+    
+print(edges)
 g.add_weighted_edges_from(edges) 
 
 # print all nodes
@@ -34,6 +42,12 @@ plt.savefig("graph.png")
 # STEP 2
 # for each node pair, find paths between them
 for n1, n2 in permutations(g.nodes,2): #permutations returns all pairs
-    print("paths from",n1,"to",n2,":")
+    # print("paths from",n1,"to",n2,":")
     for path in nx.all_simple_paths(g, source=n1, target=n2):
-        #print all paths
+        # do something
+        if n1 == "v0" and n2 == "v5":
+            print(path)
+            path_weight = 0
+            for i in range(len(path) - 1):
+                path_weight += g[path[i]][path[i+1]]['weight']
+            print("path_weight: ", path_weight)
