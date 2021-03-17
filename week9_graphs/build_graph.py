@@ -33,9 +33,10 @@ for c1 in currencies:
         j +=1
     i += 1
 g.add_weighted_edges_from(edges) 
+# print(g.info())
 
 print(g.nodes)
-input()
+# input()
 for n1, n2 in permutations(g.nodes,2):
     print("paths from ", n1, "to", n2, "----------------------------------")
     for path in nx.all_simple_paths(g, source=n1, target=n2):
@@ -43,4 +44,4 @@ for n1, n2 in permutations(g.nodes,2):
     for path in nx.all_simple_paths(g, source=n2, target=n1):
         print(path)
         
-print()
+print(0)
