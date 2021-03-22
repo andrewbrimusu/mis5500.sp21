@@ -33,9 +33,21 @@ print(g.nodes)
 # input()
 for n1, n2 in permutations(g.nodes,2):
     print("paths from",n1,"to",n2,":")
+    shortest_path_weight = 99999999999
+    shortest_path = []
     for path in nx.all_simple_paths(g, source=n1, target=n2):
         print(path)
-    for path in nx.all_simple_paths(g, source=n2, target=n1):
-        print(path)
+        path_weight = 0
+        for i in range(len(path)-1):
+            print("path from",path[i],"to",path[i+1],": ",g[path[i]][path[i+1]]["weight"])
+            path_weight += g[path[i]][path[i+1]]["weight"]
+        print(path, "weight is: ", path_weight)
+        if path_weight < shortest_path_weight:
+            shortest_path_weight = path_weight
+            shortest_path = path
+    
+    print("shortest path from", n1, "to", n2, "is: ", shortest_path, "of weight: ", shortest_path_weight)
+        
+        
         
 print(0)
