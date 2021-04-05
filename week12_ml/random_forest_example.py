@@ -34,13 +34,15 @@ X = df[['gmat', 'gpa','work_experience','age']]
 y = df['admitted']
 
 
-X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.25,random_state=0)
+X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.1,random_state=0)
 
 
-clf = RandomForestClassifier()#n_estimators=100)
+#build and test random forest model
+clf = RandomForestClassifier()
 clf.fit(X_train,y_train)
 y_pred=clf.predict(X_test)
-
+print("y predictions: ", y_pred)
+# print("y actuals: ", y_test)
 
 confusion_matrix = pd.crosstab(y_test, y_pred, rownames=['Actual'], colnames=['Predicted'])
 sn.heatmap(confusion_matrix, annot=True).get_figure().savefig("/home/ec2-user/environment/code/week12_ml/random_forest.png")
@@ -48,7 +50,33 @@ sn.heatmap(confusion_matrix, annot=True).get_figure().savefig("/home/ec2-user/en
 print('Accuracy: ',metrics.accuracy_score(y_test, y_pred))
 plt.show()
 
-print(clf.predict([[780, 4, 3, 25]]))
-print(clf.predict([[690, 3.3, 3, 25]]))
-print(clf.predict([[660, 2, 3, 25]]))
+print("3 candidate predictions...")
+print(clf.predict([[780, 4, 3, 25]])) # predict candidate with gmat 780, gpa 4.0, 3 yrs work exp., 25 years old
+print(clf.predict([[690, 3.3, 3, 25]])) #  predict candidate with gmat 690, gpa 3.3, 3 yrs work exp., 25 years old
+print(clf.predict([[660, 2, 3, 25]])) #  predict candidate with gmat 660, gpa 2.0, 3 yrs work exp., 25 years old
+
+
+
+# build and test 7 additional models
+models = [LogisticRegression(), DecisionTreeClassifier(), KNeighborsClassifier(), 
+    GaussianNB(), LinearDiscriminantAnalysis(), SVC(), MLPClassifier()]
+    
+for model in models:
+    
+    clf = model
+    clf.fit(X_train,y_train)
+    y_pred=clf.predict(X_test)
+    print("y predictions: ", y_pred)
+    # print("y actuals: ", y_test)
+    
+    confusion_matrix = pd.crosstab(y_test, y_pred, rownames=['Actual'], colnames=['Predicted'])
+    sn.heatmap(confusion_matrix, annot=True).get_figure().savefig("/home/ec2-user/environment/code/week12_ml/random_forest.png")
+    # sn.get_figure().savefig("results.png")
+    print('Accuracy: ',metrics.accuracy_score(y_test, y_pred))
+    plt.show()
+    
+    print("3 candidate predictions...")
+    print(clf.predict([[780, 4, 3, 25]])) # predict candidate with gmat 780, gpa 4.0, 3 yrs work exp., 25 years old
+    print(clf.predict([[690, 3.3, 3, 25]])) #  predict candidate with gmat 690, gpa 3.3, 3 yrs work exp., 25 years old
+    print(clf.predict([[660, 2, 3, 25]])) #  predict candidate with gmat 660, gpa 2.0, 3 yrs work exp., 25 years old
 
