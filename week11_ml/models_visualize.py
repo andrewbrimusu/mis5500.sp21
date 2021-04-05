@@ -1,3 +1,6 @@
+# This script is an extension of random_forest_example.py
+# It is the same logic but with more models
+
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
