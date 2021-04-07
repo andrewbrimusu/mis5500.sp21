@@ -60,10 +60,12 @@ print(clf.predict([[660, 2, 3, 25]])) #  predict candidate with gmat 660, gpa 2.
 
 # build and test 7 additional models
 models = [LogisticRegression(), DecisionTreeClassifier(), KNeighborsClassifier(), 
-    GaussianNB(), LinearDiscriminantAnalysis(), SVC(), MLPClassifier()]
+    GaussianNB(), LinearDiscriminantAnalysis(), SVC(), MLPClassifier(), RandomForestClassifier()]
     
 
 for model in models:
+    lst = [[0 for j in range(20)] for i in range(20)]
+    
     print(str(model) + "...")
     clf = model
     clf.fit(X_train,y_train)
@@ -71,6 +73,10 @@ for model in models:
     print("y predictions: ", y_pred)
     # print("y actuals: ", y_test)
     
+    for x in range(20):
+        for y in range(20):
+            lst[x][y] = clf.predict([[ 420 + 20*x, 2 + y*0.1, 3, 25]])[0]
+            
             
     confusion_matrix = pd.crosstab(y_test, y_pred, rownames=['Actual'], colnames=['Predicted'])
     sn.heatmap(confusion_matrix, annot=True).get_figure().savefig("/home/ec2-user/environment/code/week12_ml/random_forest.png")
@@ -83,5 +89,5 @@ for model in models:
     print(clf.predict([[690, 3.3, 3, 25]])) #  predict candidate with gmat 690, gpa 3.3, 3 yrs work exp., 25 years old
     print(clf.predict([[660, 2, 3, 25]])) #  predict candidate with gmat 660, gpa 2.0, 3 yrs work exp., 25 years old
 
-    # plt.imshow(np.array(twod), cmap='Blues',interpolation="nearest")
-    # plt.savefig(str(model)+".png")
+    plt.imshow(np.array(lst), cmap='Blues',interpolation="nearest")
+    plt.savefig(str(model)+".png")
