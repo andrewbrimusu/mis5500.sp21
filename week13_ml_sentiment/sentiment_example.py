@@ -54,15 +54,15 @@ from sklearn.metrics import classification_report
 
     
 #Amazon Data
-input_file = "~/environment/code/week13_ml/amazon_cells_labelled.txt"
+input_file = "~/environment/code/week13_ml_sentiment/amazon_cells_labelled.txt"
 amazon = pd.read_csv(input_file,delimiter='\t',header=None)
 amazon.columns = ['Sentence','Class']
 #Yelp Data
-input_file = "~/environment/code/week13_ml/yelp_labelled.txt"
+input_file = "~/environment/code/week13_ml_sentiment/yelp_labelled.txt"
 yelp = pd.read_csv(input_file,delimiter='\t',header=None)
 yelp.columns = ['Sentence','Class']
 #Imdb Data
-input_file = "~/environment/code/week13_ml/imdb_labelled.txt"
+input_file = "~/environment/code/week13_ml_sentiment/imdb_labelled.txt"
 imdb = pd.read_csv(input_file,delimiter='\t',header=None)
 imdb.columns = ['Sentence','Class']
 #combine all data sets
@@ -123,3 +123,21 @@ acc = accuracy_score(y_test, predictions, normalize=True)
 # capture = recall_score(y_test, predictions, average=None,labels=classes)
 print('Model Accuracy:%.2f'%acc)
 print(classification_report(y_test, predictions))
+
+models = [LogisticRegression(), DecisionTreeClassifier(), KNeighborsClassifier(), 
+SVC(), MLPClassifier(), RandomForestClassifier()]
+
+
+for classifier in models:
+    classifier = SGDClassifier(alpha=1e-05,max_iter=50,penalty='elasticnet')
+    targets = y_train
+    classifier = classifier.fit(counts, targets)
+    example_counts = vectorizer.transform(X_test)
+    predictions = classifier.predict(example_counts)
+    
+    #Model Evaluation
+    acc = accuracy_score(y_test, predictions, normalize=True)
+    # hit = precision_score(y_test, predictions, average=None,labels=classes)
+    # capture = recall_score(y_test, predictions, average=None,labels=classes)
+    print(str(classifier), 'Model Accuracy:%.2f'%acc)
+    print(classification_report(y_test, predictions))
