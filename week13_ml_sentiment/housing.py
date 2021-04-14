@@ -3,8 +3,9 @@ import os
 # os.system("sudo pip3 install numpy")
 # os.system("sudo pip3 install pandas")
 # os.system("sudo pip3 install keras")
-os.system("sudo pip3 install --upgrade pip")
-os.system("sudo pip3 install tensorflow==2.2")
+# os.system("sudo pip3 install matplotlib")
+# os.system("sudo pip3 install --upgrade pip")
+# os.system("sudo pip3 install tensorflow==2.2")
 
 import numpy as np
 import pandas as pd
